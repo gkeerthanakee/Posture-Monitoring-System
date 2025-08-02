@@ -1,0 +1,23 @@
+#define FLEX_SENSOR A0   // Flex sensor connected to A0
+#define BUZZER_PIN 9     // Buzzer connected to D9
+
+void setup() {
+    pinMode(FLEX_SENSOR, INPUT);  // Set flex sensor pin as input
+    pinMode(BUZZER_PIN, OUTPUT);  // Set buzzer pin as output
+    Serial.begin(9600);           // Start serial communication
+}
+
+void loop() {
+    int sensorValue = analogRead(FLEX_SENSOR); // Read flex sensor value
+    Serial.print("Flex Sensor Value: ");
+    Serial.println(sensorValue); // Print value to Serial Monitor
+
+    // Threshold for detecting bad posture (adjust if needed)
+    if (sensorValue < 600) {   // Example threshold
+        digitalWrite(BUZZER_PIN, HIGH);  // Turn buzzer ON
+    } else {
+        digitalWrite(BUZZER_PIN, LOW);   // Turn buzzer OFF
+    }
+
+    delay(500); // Small delay for stable readings
+}
